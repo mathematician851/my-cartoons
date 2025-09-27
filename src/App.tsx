@@ -72,7 +72,30 @@ export default function App() {
       </div>
     );
   }
-  if (error) return <p className="p-4 text-red-500 text-center">{error}</p>;
+  if (error) {
+    return (
+      <div className="p-6 text-center space-y-4">
+        <p className="text-red-500 font-semibold">{error}</p>
+        <button
+          onClick={() => {
+            setError("");
+            setLoading(true);
+            fetchCartoons()
+              .then((data) => {
+                setCartoons(data);
+                setFiltered(data);
+              })
+              .catch(() => setError("Failed to load cartoons."))
+              .finally(() => setLoading(false));
+          }}
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+        >
+          🔄 Try Again
+        </button>
+      </div>
+    );
+  }
+
 
   const totalPages = Math.ceil(filtered.length / perPage);
   const paginated = filtered.slice((page - 1) * perPage, page * perPage);
