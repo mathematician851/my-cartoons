@@ -55,7 +55,8 @@ cartoons-explorer/
 │   ├── components/
 │   │   ├── CartoonCard.tsx    # Single card component
 │   │   ├── CartoonsGrid.tsx   # Grid of cards
-│   │   └── SearchBar.tsx      # Search input
+│   │   └── SearchBar.tsx      #Search input
+        └── SkeletonCard.tsx   # Loading state waiting for the cartoons
 │   ├── App.tsx                # Main app (search, filter, pagination, modal)
 │   └── main.tsx               # React entry
 ├── index.html
