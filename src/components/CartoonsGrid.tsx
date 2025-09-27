@@ -3,6 +3,7 @@
 import CartoonCard from "./CartoonCard";
 import type { Cartoon } from "../api/cartoons";
 
+
 interface Props {
   cartoons: Cartoon[];
   onSelect: (cartoon: Cartoon) => void;

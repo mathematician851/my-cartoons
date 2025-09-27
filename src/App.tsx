@@ -5,6 +5,7 @@ import { fetchCartoons } from "./api/cartoons";
 import type { Cartoon } from "./api/cartoons";
 import CartoonsGrid from "./components/CartoonsGrid";
 import SearchBar from "./components/SearchBar";
+import SkeletonCard from "./components/SkeletonCard";
 
 export default function App() {
   const [cartoons, setCartoons] = useState<Cartoon[]>([]);
@@ -16,6 +17,10 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [selected, setSelected] = useState<Cartoon | null>(null);
+
+  const fallbackImage = "https://placehold.co/300x200?text=No+Image";
+
+  const [imgSrc, setImgSrc] = useState(selected?.image || fallbackImage);
 
   const perPage = 8;
 
@@ -52,10 +57,21 @@ export default function App() {
     setPage(1); // reset to page 1 on filter change
   }, [search, genre, cartoons]);
 
-  if (loading)
+  useEffect(() => {
+    if (selected) {
+      setImgSrc(selected.image || fallbackImage);
+    }
+  }, [selected]);
+
+  if (loading) {
     return (
-      <p className="p-4 text-center mt-5">Please wait, loading cartoons...</p>
+      <div className="p-6 grid grid-cols-2 md:grid-cols-4 gap-6">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <SkeletonCard key={i} />
+        ))}
+      </div>
     );
+  }
   if (error) return <p className="p-4 text-red-500 text-center">{error}</p>;
 
   const totalPages = Math.ceil(filtered.length / perPage);
@@ -126,13 +142,14 @@ export default function App() {
               ✕
             </button>
             <img
-              src={selected.image}
+              src={imgSrc}
               alt={selected.title}
-              className="w-full h-64 object-cover rounded"
+              onError={() => setImgSrc(fallbackImage)}
+              className="w-80 h-80 object-cover rounded mx-auto"
             />
             <h2 className="text-2xl font-bold mt-4">{selected.title}</h2>
             <p className="text-gray-600 italic">{selected.genre}</p>
-            {/* <p className="mt-2">{selected.description ||""}</p> */}
+            {/* <p className="mt-2">{selected.description || ""}</p> */}
           </div>
         </div>
       )}
