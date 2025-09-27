@@ -1,4 +1,4 @@
-📺 Cartoons Hub
+📺 Cartoons Explorer
 
 A small React + TypeScript project built with Vite and styled using Tailwind CSS.
 Users can search, filter by genre, paginate results, and view cartoon details in a modal.
@@ -21,7 +21,7 @@ Users can search, filter by genre, paginate results, and view cartoon details in
 Prerequisites
 
 Node.js
- v18+ (recommended v20)
+ v19+ (recommended v20)
 
 npm or yarn
 

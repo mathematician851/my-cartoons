@@ -91,7 +91,7 @@ export default function App() {
 
   return (
     <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Cartoons Hub</h1>
+      <h1 className="text-2xl font-bold">Cartoons Explorer</h1>
 
       {/* Search + Genre Filter */}
       <div className="flex gap-4 items-center">
